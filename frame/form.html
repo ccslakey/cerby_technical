@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Credential Vault</title>
+    <link rel="stylesheet" href="form.css" />
+  </head>
+  <body>
+    <!--
+      This document runs on the chrome-extension:// origin. It is the only
+      context in this extension that renders or reads a plaintext credential.
+      The embedding page cannot reach into it: cross-origin means no
+      contentDocument, no input reads, no event listeners.
+
+      No inline script — the extension CSP is script-src 'self'.
+    -->
+    <form id="form" autocomplete="off" novalidate>
+      <header>
+        <h1>Vault</h1>
+        <p id="origin" class="origin" title="">…</p>
+      </header>
+
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        autocomplete="off"
+        spellcheck="false"
+        autocapitalize="off"
+        autocorrect="off"
+      />
+
+      <label for="password">Password</label>
+      <!--
+        autocomplete="new-password" keeps Chrome's own password manager from
+        prompting on top of ours, which would be a confusing second UI.
+      -->
+      <input id="password" name="password" type="password" autocomplete="new-password" />
+
+      <button type="submit">Save</button>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <script src="form.js"></script>
+  </body>
+</html>

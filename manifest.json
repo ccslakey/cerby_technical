@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Credential Vault",
+  "version": "0.1.0",
+  "description": "Stores one username/password per site inside an isolated extension frame the host page cannot read.",
+
+  "permissions": ["storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+
+  "background": {
+    "service_worker": "bg/service-worker.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content/inject.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["frame/form.html"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; frame-ancestors http: https:"
+  }
+}

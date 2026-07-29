@@ -1,0 +1,13 @@
+{
+  "name": "credential-vault-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MV3 extension that stores one credential per origin inside an isolated extension frame.",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  }
+}
